@@ -44,7 +44,8 @@ class Trade {
     }
 }
 function parseAndFormat(fileName, start, end) {
-    let prices = JSON.parse(fs.readFileSync(fileName))
+    const path = './prices/' + fileName
+    let prices = JSON.parse(fs.readFileSync(path))
     const ranged = prices.filter((el) => {
         let d = new Date(el.date)
         return d.getTime() >= start.getTime() && d.getTime() <= end.getTime()
@@ -258,7 +259,7 @@ function computeCompoundInterest(startingCash, endCash, startTime, endTime) {
 
 
 const dailyPnl = createCsvWriter({
-    path: 'daily.csv',
+    path: './output/daily.csv',
     header: [
         { id: 'index', title: 'index' },
         { id: 'date', title: 'date' },
@@ -275,7 +276,7 @@ const dailyPnl = createCsvWriter({
 
 
 const csvWriter = createCsvWriter({
-    path: 'out.csv',
+    path: './output/tradeHistory.csv',
     header: [
         { id: 'index', title: 'index' },
         { id: 'side', title: 'side' },
